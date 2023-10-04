@@ -1,0 +1,20 @@
+enum Roles {
+    ADMIN
+    USER
+}
+
+type Role {
+    name: String
+    role: Roles
+    user: User
+}
+
+input CreateRoleInput {
+    name: String
+    role: Roles
+}
+
+type CreateRolePayload {
+    name:String
+    role: Roles
+}

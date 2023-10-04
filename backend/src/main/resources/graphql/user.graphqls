@@ -1,0 +1,43 @@
+type Query {
+    getUserById (id: ID): User
+    getUserByUsername(username: String): User
+}
+
+type Mutation {
+    createUser(createUserInput: CreateUserInput!): CreateUserPayload
+    createRole(createRoleInput: CreateRoleInput!) : CreateRolePayload
+    updateUser(updateUserInput: UpdateUserInput!): CreateUserPayload
+    signUp(signUpUserInput: SignUpUserInput!): CreateUserPayload
+}
+
+type CreateUserPayload {
+    payload: String
+    user: User
+}
+
+input SignUpUserInput {
+    username: String!
+    password: String!
+}
+
+input UpdateUserInput {
+    username: String
+    roles: [Roles!]
+}
+
+input CreateUserInput {
+    firstName: String
+    lastName: String
+    username: String!
+    password: String!
+    roles: [Roles!]
+}
+
+type User {
+    id: ID!
+    firstName: String
+    lastName: String
+    username: String!
+    roles: [Role]
+}
+
