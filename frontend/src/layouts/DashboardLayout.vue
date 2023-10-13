@@ -1,113 +1,196 @@
 <template>
-  <q-layout class="bodyStyle" view="lHr lpr lFf">
-    <q-header class="bg-transparent" borderless>
-      <div class="headerStyle">
-        <div style="margin-top: 2vw">
-          <h2 class="text-weight-light" style="color: black">Overview</h2>
-          <h6
-            class="text-weight-light"
-            style="color: black; margin-left: 0.5vw"
-          >
-            11th of October 2023
-          </h6>
+  <q-layout view="lHh LpR lFf">
+    <q-header reveal>
+      <q-toolbar class="row justify-between">
+        <q-input
+          standout
+          v-model="text"
+          input-class="text-left"
+          :input-style="{ color: 'black' }"
+          class="q-mt-md col-2"
+          rounded
+          placeholder="Search"
+          bg-color="grey-3"
+          label-color="red"
+        >
+          <template v-slot:append>
+            <q-icon color="black" name="search" />
+          </template>
+        </q-input>
+        <div class="row justify-between col-1">
+          <q-item-section class="col-1" avatar>
+            <q-icon style="color: #514d59" name="sym_o_notifications" />
+          </q-item-section>
+          <q-item-section class="col-1" avatar>
+            <q-icon style="color: #514d59" name="sym_o_message" />
+          </q-item-section>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/img/avatar.png" />
+          </q-avatar>
         </div>
+      </q-toolbar>
+    </q-header>
+    <q-drawer
+      class="left-navigation text-white"
+      show-if-above
+      v-model="left"
+      side="left"
+    >
+      <div class="full-height">
+        <div style="height: calc(100% - 117px); padding: 10px">
+          <q-toolbar class="q-pb-md">
+            <q-avatar>
+              <q-img style="width: 1vw" src="../assets/kf-logo-small.png" />
+            </q-avatar>
 
-        <div class="cards">
-          <q-input
-            bg-color="blue-grey-1"
-            label-color="black"
-            color="blue-grey-1"
-            rounded
-            outlined
-            v-model="text"
-            label="Search"
-            style="margin-right: 10vw"
-          >
-            <template v-slot:append>
-              <q-icon name="search" />
-            </template>
-          </q-input>
-
-          <q-card
-            flat
-            v-ripple
-            class="q-mr-md q-mt-sm cursor-pointer q-hoverable cardStyle"
-            bordered
-          >
-            <span class="q-focus-helper"></span>
-            <q-card-section>
-              <q-icon color="blue-grey-7" size="2rem" name="inbox" />
-            </q-card-section>
-          </q-card>
-
-          <q-card
-            flat
-            v-ripple
-            class="q-mr-md q-mt-sm cursor-pointer q-hoverable cardStyle"
-            bordered
-          >
-            <span class="q-focus-helper"></span>
-            <q-card-section>
-              <q-icon color="blue-grey-7" size="2rem" name="notifications" />
-            </q-card-section>
-          </q-card>
+            <q-toolbar-title style="color: #514d59">
+              <div class="text-h6 text-weight-regular">Katty Fashion</div>
+            </q-toolbar-title>
+          </q-toolbar>
+          <q-separator />
+          <q-scroll-area style="height: 100%">
+            <q-list padding>
+              <menu-items-with-separators-vue
+                v-for="(item, index) in menuItems.item"
+                :key="index"
+                :active-class="item.activeClass"
+                :to="item.to"
+                :class="item.clas"
+                :section-start="item.sectionStart"
+                :section-name="item.sectionName"
+                :menu-item-name="item.section.menuItemName"
+                :avatar="item.section.avatar"
+              />
+            </q-list>
+          </q-scroll-area>
         </div>
       </div>
-    </q-header>
-    <drawer-layuout></drawer-layuout>
-    <q-page-container class="page-container">
-      <router-view />
+    </q-drawer>
+
+    <q-page-container>
+      <q-page class="row no-wrap">
+        <div class="col">
+          <div class="full-height">
+            <q-scroll-area class="col q-pr-sm full-height" visible>
+              <router-view />
+            </q-scroll-area>
+          </div>
+        </div>
+      </q-page>
     </q-page-container>
   </q-layout>
 </template>
 
 <script setup>
-import DrawerLayuout from './drawer/DrawerLayout.vue';
+import { ref } from 'vue';
+import MenuItemsWithSeparatorsVue from 'src/components/Menu/MenuItemsWithSeparators.vue';
+
+const left = ref(false);
+
+const menuItems = ref({
+  item: [
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionStart: false,
+      sectionName: '',
+      section: {
+        menuItemName: 'Dashboard',
+        avatar: 'sym_o_dashboard',
+      },
+    },
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionStart: false,
+      sectionName: '',
+      section: {
+        menuItemName: 'Account Settings',
+        avatar: 'sym_o_manage_accounts',
+      },
+    },
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionName: 'Product',
+      sectionStart: true,
+      section: {
+        menuItemName: 'Orders',
+        avatar: 'sym_o_shopping_cart',
+      },
+    },
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionStart: false,
+      sectionName: '',
+      section: {
+        menuItemName: 'Another Button',
+        avatar: 'sym_o_date_range',
+      },
+    },
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionStart: false,
+      sectionName: '',
+      section: {
+        menuItemName: 'Another Button',
+        avatar: 'sym_o_savings',
+      },
+    },
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionStart: true,
+      sectionName: 'Another Separator',
+      section: {
+        menuItemName: 'Another Button',
+        avatar: 'sym_o_analytics',
+      },
+    },
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionStart: false,
+      sectionName: '',
+      section: {
+        menuItemName: 'Another Button',
+        avatar: 'sym_o_code',
+      },
+    },
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionStart: false,
+      sectionName: '',
+      section: {
+        menuItemName: 'Another Button',
+        avatar: 'sym_o_supervisor_account',
+      },
+    },
+    {
+      activeClass: 'active-class',
+      to: '/dashboard',
+      class: 'q-ma-sm navigation-item',
+      sectionStart: false,
+      sectionName: '',
+      section: {
+        menuItemName: 'Another Button',
+        avatar: 'sym_o_stars',
+      },
+    },
+  ],
+});
 </script>
 
 <style scoped>
-.bodyStyle {
-  min-height: 100%;
-  background-color: #eff3f4;
-}
-
-.headerStyle {
-  margin-left: 1vw;
-  margin-right: 1vw;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-:deep(.q-field--filled.q-field--rounded .q-field__control) {
-  border-radius: 28px 28px 28px 28px;
-}
-
-:deep(.q-btn .q-focus-helper) {
-  color: #53c5ba;
-}
-
-:deep(.q-hoverable .q-focus-helper) {
-  color: #53c5ba;
-}
-
-.cardStyle {
-  background: transparent;
-  width: 100%;
-  height: 4.5vh;
-  max-width: 2.5vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 10px 10px 10px 10px;
-}
-
-.cards {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  margin-top: 2.5vw;
-}
 </style>

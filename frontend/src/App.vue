@@ -5,7 +5,7 @@
 <script setup lang="ts">
 </script>
 
-<style>
+<style lang="scss">
 h6,
 h5,
 h4,
@@ -14,9 +14,5 @@ h2,
 h1 {
   margin: 0;
   -webkit-font-smoothing: antialiased;
-}
-
-body.desktop .q-focus-helper {
-  opacity: 1;
 }
 </style>
