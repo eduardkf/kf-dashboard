@@ -1,0 +1,17 @@
+@use '../quasar.variables.scss' as variables;
+
+.q-drawer {
+  background-color: variables.$background-color;
+}
+
+.q-toolbar {
+  background-color: variables.$background-color;
+}
+
+body.desktop {
+  & .q-focus-helper {
+    opacity: 1;
+    color: variables.$primary;
+    border-radius: 15px 15px 15px 15px;
+  }
+}

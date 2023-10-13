@@ -1,188 +1,117 @@
 <template>
-  <q-page class="page-container">
-    <div class="split-card-container">
-      <div class="split-card">
-        <q-card class="split-left" bordered>
-          <h2
-            class="text-weight-light text-center"
-            style="margin: 0; color: white"
-          >
-            Welcome to KF Dashboard
-          </h2>
-          <carousel-component :slides="carouselSlides"></carousel-component>
-        </q-card>
-        <q-card class="split-right">
-          <q-img class="toggle-container" src="../assets/kf-logo-small.png" />
-
-          <div class="center-form">
-            <div style="max-width: 100%">
-              <q-tabs
-                v-model="tab"
-                align="justify"
-                narrow-indicator
-                class="q-my-xl"
-              >
-                <q-tab class="text-primary" name="SignIn">
-                  <template v-slot:default>
-                    <h2
-                      class="text-weight-light text-center"
-                      style="color: white"
-                    >
-                      Sign In
-                    </h2>
-                  </template>
-                </q-tab>
-
-                <q-tab class="text-primary" name="SignUp">
-                  <template v-slot:default>
-                    <h2
-                      class="text-weight-light text-center"
-                      style="color: white"
-                    >
-                      Sign Up
-                    </h2>
-                  </template>
-                </q-tab>
-              </q-tabs>
+  <q-layout>
+    <q-page-container>
+      <q-page class="backgroundClass flex flex-center">
+        <q-card
+          class="q-ma-md xs-12 sm-10 md-8 lg-6"
+          bordered
+          style="border-radius: 20px 20px 20px 20px"
+        >
+          <q-card-section class="q-ml-md q-pa-lg">
+            <div class="row justify-center">
+              <div style="color: #514d59" class="text-h4 ellipsis">
+                <q-avatar class="col">
+                  <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
+                </q-avatar>
+                Katty Fashion
+              </div>
             </div>
-            <!-- Form with email, password, and submit button -->
-            <div class="q-gutter-y-sm">
-              <q-tab-panels
-                v-model="tab"
-                animated
-                transition-prev="slide-right"
-                transition-next="slide-left"
-                class="transparent"
+            <div class="column q-pt-lg">
+              <div
+                style="color: #514d59"
+                class="row text-weight-regular text-h6"
               >
-                <q-tab-panel class="q-ml-xl" style="width: 50vh" name="SignIn">
-                  <sign-in-form></sign-in-form>
-                </q-tab-panel>
-                <q-tab-panel class="q-ml-xl" style="width: 50vh" name="SignUp">
-                  <sign-up-form></sign-up-form>
-                </q-tab-panel>
-              </q-tab-panels>
+                Welcome to KF Dashboard! 👋🏻
+              </div>
+              <div
+                style="color: #514d598a"
+                class="row text-weight-regular text-subtitle1"
+              >
+                Please sign-in to your account and start the adventure
+              </div>
             </div>
-          </div>
+          </q-card-section>
+          <q-card-section class="q-ml-md q-mr-md">
+            <q-form class="q-gutter-md">
+              <q-input rounded v-model="text" label="Username"> </q-input>
+              <q-input type="password" v-model="password" label="Password" />
+              <div class="row items-center">
+                <q-checkbox v-model="val" />
+                <div
+                  style="color: #514d598a"
+                  class="col text-weight-regular text-subtitle1"
+                >
+                  Remember me
+                </div>
+                <q-btn
+                  flat
+                  color="primary"
+                  label="Forgot password?"
+                  class="no-hover"
+                />
+              </div>
+              <div>
+                <q-btn
+                  label="Login"
+                  to="/main"
+                  type="button"
+                  color="primary"
+                  style="width: 100%"
+                />
+              </div>
+            </q-form>
+            <div class="q-mt-md row justify-center items-center">
+              <div
+                style="color: #514d598a"
+                class="column text-weight-regular text-subtitle1"
+              >
+                New on our platform?
+              </div>
+              <q-btn
+                flat
+                color="primary"
+                label="Create an account"
+                class="column col-6 no-hover"
+              />
+            </div>
+            <div class="text-center col justify-center">
+              <separator-with-text class="row q-mt-md" text="or" />
+              <i
+                class="q-mr-lg q-mt-lg fa-brands fa-google fa-xl"
+                style="color: #db4437"
+              ></i>
+            </div>
+          </q-card-section>
         </q-card>
-      </div>
-    </div>
-  </q-page>
+        <q-footer class="backgroundClass"> </q-footer>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 </template>
 
-<script setup lang="ts">
-import CarouselComponent from 'src/components/carousel/CarouselComponent.vue';
-import SignInForm from 'src/components/forms/SignInForm.vue';
-import SignUpForm from 'src/components/forms/SignUpForm.vue';
+<script type="text/javascript"></script>
+<script setup >
 import { ref } from 'vue';
+import SeparatorWithText from '../components/Menu/SeparatorWithText.vue';
 
-const buttonTogglemodel = ref(true);
-const text = ref('');
-const tab = ref('SignIn');
-const val = ref(true);
+const val = ref(false);
+</script>
 
-const carouselSlides = ref([
-  {
-    imageSrc: 'src/assets/login-lady.png',
-    altText: 'Slide 1',
-    title: 'Plan your operation using the KF Dashboard',
-  },
-  {
-    imageSrc: 'src/assets/customer.png',
-    altText: 'Slide 1',
-    title: 'Connect the customer with the designers',
-  },
-  {
-    imageSrc: 'src/assets/design-login.png',
-    altText: 'Slide 1',
-    title: 'Plan the design',
-  },
-  {
-    imageSrc: 'src/assets/production-login.png',
-    altText: 'Slide 1',
-    title: 'Plan and follow the production process',
-  },
-]);
-</script >
+<style lang="scss">
+@use '../css/quasar.variables.scss' as variables;
 
-<style scoped>
-.buttonGroup {
-  display: flex;
-  flex-direction: row;
+.login-form {
+  position: absolute;
 }
 
-.center-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 50%;
+.no-hover .q-focus-helper {
+  background-color: transparent !important; /* Remove background color on hover */
 }
 
-.toggle-container {
-  display: flex;
-  flex-direction: column;
-  max-width: 40px;
-  justify-content: flex-end;
-  margin-left: auto;
-}
-
-.carousel-style {
-  min-height: 80vh;
-  width: 50vh;
-}
-
-.page-container {
-  height: 100vh;
-  background: linear-gradient(
-    86deg,
-    rgba(159, 62, 90, 1) 0%,
-    rgba(201, 101, 120, 1) 27%,
-    rgba(201, 101, 120, 1) 63%,
-    rgba(156, 59, 87, 1) 100%
-  );
-}
-
-.split-card-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  width: 100vw;
-}
-
-.split-card {
-  min-height: 50vh;
-  min-width: 100vh;
-  display: flex;
-}
-
-.split-left,
-.split-right {
-  flex: 1;
-  padding: 20px;
-}
-
-.split-left {
-  min-height: 70vh;
-  max-width: 60vh;
-  background: linear-gradient(
-    90deg,
-    rgba(103, 218, 198, 1) 0%,
-    rgba(110, 224, 203, 1) 53%,
-    rgba(88, 190, 174, 1) 100%
-  );
-  border-radius: 20px 0px 0px 20px;
-}
-
-.split-right {
-  background: linear-gradient(
-    86deg,
-    rgba(53, 70, 93, 1) 0%,
-    rgba(56, 74, 99, 1) 53%,
-    rgba(55, 73, 96, 1) 100%
-  );
-  border-radius: 0px 20px 20px 0px;
-  min-height: 70vh;
-  max-width: 60vh;
+.backgroundClass {
+  background-image: url('../assets/loginBackground.png');
+  background-size: 100vw; /* Cover the entire element */
+  background-position: center bottom; /* Position the image at the center of the bottom */
+  background-repeat: no-repeat; /* Do not repeat the image */
 }
 </style>

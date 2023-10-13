@@ -1,0 +1,6 @@
+@use 'quasar.variables.scss' as variables;
+
+@mixin bodyStyle {
+  font-size: 1rem;
+  background-color: variables.$background-color;
+}
